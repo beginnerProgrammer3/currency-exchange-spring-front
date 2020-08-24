@@ -1,0 +1,27 @@
+<br>
+<div class="form1">
+<form >
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Currency 1</label>
+    <div class="col-sm-10">
+      <select class="form-control">
+        <option *ngFor="let currency of currencies"  name="cur1">{{currency.intCode}} - {{currency.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Currency 2</label>
+    <div class="col-sm-10">
+      <select class="form-control" name="Currency2">
+        <option *ngFor="let currency of currencies"  [value]="currency.intCode" name="cur2"> {{currency.intCode}} - {{currency.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="sdfsdf">
+    <button class="btn btn-submit" (click)="getCurrency()" type="submit">Get Actual Exchange Rate </button></div>
+</form>
+</div>
+
+
