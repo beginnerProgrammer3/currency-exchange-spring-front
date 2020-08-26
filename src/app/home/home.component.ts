@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Currency} from '../Currency';
-import {HttpClient} from '@angular/common/http';
 import {HttpClientService} from '../http-client.service';
 import {ActualExchangeRate} from '../ActualExchangeRate';
+
 
 @Component({
   selector: 'app-home',
@@ -12,9 +12,10 @@ import {ActualExchangeRate} from '../ActualExchangeRate';
 export class HomeComponent implements OnInit {
   selectedCurrency1 = '';
   selectedCurrency2 = '';
-  public currencies: Currency[];
-  public actualRate: ActualExchangeRate = null;
-
+  currencies: Currency[];
+  actualRate: any;
+  value1 = null;
+  howmuch = '';
   constructor(private httpClientService: HttpClientService) {
   }
 
@@ -27,12 +28,14 @@ export class HomeComponent implements OnInit {
   }
 
   getCurrency() {
-    console.log(this.selectedCurrency1 + ' : ' + this.selectedCurrency2);
     this.httpClientService.getActualCurrency(this.selectedCurrency1, this.selectedCurrency2).subscribe(data => {
       this.actualRate = data;
-      console.log(this.actualRate);
+      this.value1 = this.actualRate;
     }, error => {
       console.log(error.message);
     });
+
+
+    console.log(this.howmuch);
   }
 }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Currency} from './Currency';
 import {ActualExchangeRate} from './ActualExchangeRate';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class HttpClientService {
   }
 
   getActualCurrency(from: string, to: string){
-    return this.httpClient.get<ActualExchangeRate>('http://localhost:8080/getcurrencyexchange/' + from + '/exchange/' + to);
+    return this.httpClient.get('http://localhost:8080/getcurrencyexchange/' + from + '/exchange/' + to);
   }
 
 }

@@ -1,8 +1,8 @@
 <br>
 <div class="form1">
-<form >
+<form (submit)="getCurrency()">
   <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Currency 1</label>
+    <label class="col-sm-2 col-form-label">Exchange Currency: </label>
     <div class="col-sm-10">
       <select class="form-control" name="currency1" [(ngModel)]="selectedCurrency1">
         <option *ngFor="let currency of currencies"  [value]="currency.intCode" [selected]="selectedCurrency1 == currency.intCode">{{currency.intCode}} - {{currency.name}}
@@ -10,8 +10,17 @@
       </select>
     </div>
   </div>
+
   <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Currency 2</label>
+    <label class="col-sm-2 col-form-label">How much You want to Exchange: </label>
+    <div class="col-sm-10">
+      <input class="form-control" type="number" [(ngModel)]="howmuch" name="howmuch">
+    </div>
+  </div>
+
+
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">To Currency:</label>
     <div class="col-sm-10">
       <select class="form-control" name="currency2" [(ngModel)]="selectedCurrency2">
         <option *ngFor="let currency of currencies"  [value]="currency.intCode" [selected]="selectedCurrency2 == currency.intCode" name="cur2"> {{currency.intCode}} - {{currency.name}}
@@ -20,8 +29,10 @@
     </div>
   </div>
   <div class="sdfsdf">
-    <button class="btn btn-submit" (click)="getCurrency()" type="submit">Get Actual Exchange Rate </button></div>
+    <button class="btn btn-submit" type="submit">Get Actual Exchange Rate </button></div>
 </form>
-</div>
+  <div *ngIf="value1 !== null">    Actual rate is: {{value1}}
+  <p>For {{howmuch}} {{selectedCurrency1}} you get  {{howmuch * value1}}  of {{selectedCurrency2}}</p></div>
 
+</div>
 
