@@ -5,3 +5,7 @@ div.form1{
 button {
 
   margin-left :5px }
+
+div.error{
+  color: firebrick;
+}

@@ -1,20 +1,26 @@
 <br>
 <div class="form1">
-<form (submit)="getCurrency()">
+<form #currencyForm="ngForm" (ngSubmit)="getCurrency(currencyForm)">
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">Your actual currency: </label>
     <div class="col-sm-10">
-      <select class="form-control" name="currency1" [(ngModel)]="selectedCurrency1">
+      <select  class="form-control" name="currency1" [(ngModel)]="selectedCurrency1" required #currency1="ngModel">
         <option *ngFor="let currency of currencies"  [value]="currency.intCode" [selected]="selectedCurrency1 == currency.intCode">{{currency.intCode}} - {{currency.name}}
         </option>
       </select>
+      <div *ngIf="currency1.invalid">
+        <div class="error">currency1 is required.</div>
+      </div>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">How much You want to Exchange: </label>
     <div class="col-sm-10">
-      <input class="form-control" type="number" [(ngModel)]="howmuch" name="howmuch">
+      <input class="form-control" type="number" [(ngModel)]="howmuch" name="howmuch" required #uname="ngModel">
+      <div *ngIf="uname.invalid">
+        <div class="error">Value is required</div>
+      </div>
     </div>
   </div>
 
@@ -22,18 +28,21 @@
   <div class="form-group row">
     <label class="col-sm-2 col-form-label">To Currency:</label>
     <div class="col-sm-10">
-      <select class="form-control" name="currency2" [(ngModel)]="selectedCurrency2">
+      <select required="required" class="form-control" name="currency2" [(ngModel)]="selectedCurrency2" required #currency2="ngModel">
         <option *ngFor="let currency of currencies"  [value]="currency.intCode" [selected]="selectedCurrency2 == currency.intCode" name="cur2"> {{currency.intCode}} - {{currency.name}}
         </option>
       </select>
+      <div *ngIf="currency2.invalid">
+        <div class="error">currency2 is required</div>
+      </div>
     </div>
   </div>
   <div class="sdfsdf">
-    <button class="btn btn-warning" type="submit">Get Actual Exchange Rate </button></div>
+    <button class="btn btn-warning" type="submit" >Get Actual Exchange Rate </button></div>
 </form>
   <div *ngIf="value1 !== null">
     <strong>Actual rate is: {{value1}} </strong><br>
-    <strong>For {{howmuch}} {{selectedCurrency1}} you'll get  {{howmuch * value1}}  of {{selectedCurrency2}}</strong>
+    <strong>For {{howmuch}} {{currency1onPage}} you'll get  {{howmuch * value1}}  of {{currency2onPage}}</strong>
     <div class="form-group row">
 
         <button class="btn btn-primary" (click)="getDailyChartCurrencyHistory()">Show daily graph </button>
@@ -43,24 +52,31 @@
 
 
         <button class="btn btn-secondary" type="submit" (click)="getMonthlyChartCurrencyHistory()">Show monthly graph </button>
+      <div *ngIf="requestError === ''; else empty">
+        <div style="display: block">
 
-<!--    </div>-->
-<!--    <button class="btn btn-success" type="submit" (click)="getData()">Show monthly graph </button>-->
-<!--  </div>-->
+          <canvas baseChart
+                  [datasets]="barChartData"
+                  [labels]="barChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="line" >
+          </canvas>
+        </div>
+      </div>
+
+      <ng-template #empty>
+        <br>
+        <strong> {{requestError}} </strong>
+      </ng-template>
 
     </div>
-<div>
-  <div style="display: block">
 
-    <canvas baseChart
-            [datasets]="barChartData"
-            [labels]="barChartLabels"
-            [options]="barChartOptions"
-            [legend]="barChartLegend"
-            [chartType]="line" >
-    </canvas>
-  </div>
-</div></div>
+    </div>
+  <br>
+  <strong>!! IMPORTANT !! THIS APLICATION USE SLOW API SERVICE, WAIT A MINUTE AND TAKE SOME TIME FOR API SERVICE!!! </strong>
+  <br>
+  <strong>!! API WILL BLOCK YOU FOR WHILE IF YOU SEND TOO MANY REQUESTS IN ONE TIME !!!</strong>
 </div>
 
 

@@ -2,6 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {Currency} from '../Currency';
 import {HttpClientService} from '../http-client.service';
 import {HistoryData} from '../HistoryData';
+import {NgForm} from '@angular/forms';
 
 
 @Component({
@@ -12,12 +13,15 @@ import {HistoryData} from '../HistoryData';
 
 @Injectable()
 export class HomeComponent implements OnInit {
+  isValid = false;
   selectedCurrency1 = '';
+  currency1onPage = '';
   selectedCurrency2 = '';
+  currency2onPage = '';
+  value1 = null;
   history: HistoryData[];
   currencies: Currency[];
   actualRate: any;
-  value1 = null;
   howmuch = '';
   loadData = false;
   data: Array<any> = [];
@@ -25,6 +29,7 @@ export class HomeComponent implements OnInit {
   close: Array<any> = [];
   high: Array<any> = [];
   low: Array<any> = [];
+  requestError: string = null;
 
 
   constructor(private httpClientService: HttpClientService) {
@@ -50,11 +55,20 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.log(error.message);
     });
+
   }
 
-  getCurrency() {
+
+  getCurrency(form: NgForm) {
+    this.isValid = false;
+    if (form.invalid) {
+      return;
+    }
+    this.isValid = true;
     this.httpClientService.getActualCurrencyRate(this.selectedCurrency1, this.selectedCurrency2).subscribe(data => {
       this.actualRate = data;
+      this.currency1onPage = this.selectedCurrency1;
+      this.currency2onPage = this.selectedCurrency2;
       this.value1 = this.actualRate;
     }, error => {
       console.log(error.message);
@@ -73,7 +87,8 @@ export class HomeComponent implements OnInit {
         console.log(this.history);
         this.loadData = true;
         this.getData();
-        }, error => console.log(error.message));
+        this.requestError = '';
+        }, error => this.requestError = '... ... ..seems that for this currencies you cant get daily history');
 
   }
 
@@ -85,7 +100,8 @@ export class HomeComponent implements OnInit {
         console.log(history);
         this.loadData = true;
         this.getData();
-        }, error => console.log(error.message));
+        this.requestError = '';
+        }, error => this.requestError = '... ... ..seems that for this currencies you cant get monthly history');
 
   }
 
@@ -98,9 +114,8 @@ export class HomeComponent implements OnInit {
         console.log(data);
         this.loadData = true;
         this.getData();
-      } , error => console.log(error.message));
-
-
+        this.requestError = '';
+      } , error => this.requestError = '... ... ..seems that for this currencies you cant get weekly history');
   }
 
   getData() {
