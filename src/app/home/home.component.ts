@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   high: Array<any> = [];
   low: Array<any> = [];
   requestError: string = null;
+  currencyError: string = null;
 
 
   constructor(private httpClientService: HttpClientService) {
@@ -70,9 +71,7 @@ export class HomeComponent implements OnInit {
       this.currency1onPage = this.selectedCurrency1;
       this.currency2onPage = this.selectedCurrency2;
       this.value1 = this.actualRate;
-    }, error => {
-      console.log(error.message);
-    });
+    }, error => this.currencyError = ' ...seems that this api cant convert these currences that fast, try again');
 
 
     console.log(this.howmuch);

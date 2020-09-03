@@ -40,9 +40,11 @@
   <div class="sdfsdf">
     <button class="btn btn-warning" type="submit" >Get Actual Exchange Rate </button></div>
 </form>
+  <div *ngIf="currencyError == null; else emptyCurrency">
   <div *ngIf="value1 !== null">
     <strong>Actual rate is: {{value1}} </strong><br>
     <strong>For {{howmuch}} {{currency1onPage}} you'll get  {{howmuch * value1}}  of {{currency2onPage}}</strong>
+
     <div class="form-group row">
 
         <button class="btn btn-primary" (click)="getDailyChartCurrencyHistory()">Show daily graph </button>
@@ -71,12 +73,16 @@
       </ng-template>
 
     </div>
-
-    </div>
+  </div>
+    </div><ng-template #emptyCurrency>
   <br>
-  <strong>!! IMPORTANT !! THIS APLICATION USE SLOW API SERVICE, WAIT A MINUTE AND TAKE SOME TIME FOR API SERVICE!!! </strong>
+  <strong class="errorCurrency"> {{currencyError}} </strong>
   <br>
-  <strong>!! API WILL BLOCK YOU FOR WHILE IF YOU SEND TOO MANY REQUESTS IN ONE TIME !!!</strong>
+</ng-template>
+  <br>
+  <strong>!! IMPORTANT !! THIS APLICATION USE SLOW EXTERNAL API SERVICE, WAIT A MINUTE AND TAKE SOME TIME FOR API SERVICE!!! </strong>
+  <br>
+  <strong>!! EXTERNAL API SERVICE WILL BLOCK YOU FOR WHILE IF YOU SEND TOO MANY REQUESTS IN ONE TIME !!!</strong>
 </div>
 
 
