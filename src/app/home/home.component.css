@@ -9,3 +9,7 @@ button {
 div.error{
   color: firebrick;
 }
+
+.errorCurrency{
+  color: brown;
+}

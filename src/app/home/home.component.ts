@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
       this.currency1onPage = this.selectedCurrency1;
       this.currency2onPage = this.selectedCurrency2;
       this.value1 = this.actualRate;
-    }, error => this.currencyError = ' ...seems that this api cant convert these currences that fast, try again');
+    }, error => this.currencyError = ' ...seems that this api cant convert these currences that fast, try again !');
   }
 
   getDailyChartCurrencyHistory() {
