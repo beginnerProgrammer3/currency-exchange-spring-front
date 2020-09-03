@@ -56,7 +56,6 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.log(error.message);
     });
-
   }
 
 
@@ -72,10 +71,6 @@ export class HomeComponent implements OnInit {
       this.currency2onPage = this.selectedCurrency2;
       this.value1 = this.actualRate;
     }, error => this.currencyError = ' ...seems that this api cant convert these currences that fast, try again');
-
-
-    console.log(this.howmuch);
-
   }
 
   getDailyChartCurrencyHistory() {
