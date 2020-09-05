@@ -25,7 +25,6 @@ export class ChartComponent implements OnInit {
     {data: [11, 11, 11, 11, 11, 11, 11], label: 'High'},
     {data: [38, 58, 30, 29, 56, 87, 10], label: 'Low'}
   ];
-
   ngOnInit(): void {
     this.history = this.homeComponent.history;
     console.log(this.homeComponent.history);

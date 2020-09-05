@@ -8,8 +8,6 @@ const routes: Routes = [
   { path: 'chart', component: ChartComponent}
   ];
 
-
-
 @NgModule({
   imports: [ RouterModule.forRoot(routes)],
   exports: [RouterModule]
