@@ -1,9 +1,9 @@
 div.form1{
-  width: 800px;
+  max-width: 800px;
 }
 
 button {
-
+  padding: 5px;
   margin-left :5px }
 
 div.error{
@@ -12,4 +12,8 @@ div.error{
 
 .errorCurrency{
   color: brown;
+}
+
+div.all{
+  padding: 10px;
 }
