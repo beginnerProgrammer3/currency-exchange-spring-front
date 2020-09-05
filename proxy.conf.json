@@ -1,6 +1,6 @@
 {
   "/": {
-    "target": "http://localhost:8080",
+    "target": "https://currencybackendjs.herokuapp.com",
     "secure": false
   }
 }

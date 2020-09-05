@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Currency} from './Currency';
-import {ActualExchangeRate} from './ActualExchangeRate';
 import {HistoryData} from './HistoryData';
 import {Observable} from 'rxjs';
 
